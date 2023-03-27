@@ -7,6 +7,7 @@ import {
   StyleSheet,
   SafeAreaView,
   TextInput,
+  Alert,
 } from "react-native";
 
 import { db } from "../../../Config/Config";
@@ -71,7 +72,7 @@ const CountScreen = ({ startCount, stopCount, CliendId }) => {
         ADICIONAL: count1[5] || 0,
       })
       .then(() => {
-        alert("Dados de contagem salvos com sucesso!");
+        Alert.alert("Salvo com sucesso!");
         setMovTitle("");
         setTimeStart("");
         setTimeEnd("");

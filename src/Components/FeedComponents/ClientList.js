@@ -20,8 +20,8 @@ const ClientList = ({ data }) => {
         }}
       >
         <View style={styles.container}>
-          <Text style={styles.itemP1}>{data.nome}</Text>
-          <Text style={styles.itemP2}>{data.descrição}</Text>
+          <Text style={styles.itemP1}>{data.name}</Text>
+          <Text style={styles.itemP2}>{data.email}</Text>
         </View>
       </TouchableOpacity>
     </SafeAreaView>

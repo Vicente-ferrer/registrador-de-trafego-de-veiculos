@@ -8,6 +8,7 @@ import MainTab from "./MainTab";
 import HomeScreen from "../Pages/Home/Index";
 import ClientInfo from "../Pages/Feed/ClientInfos/ClientInfo";
 import GridList from "../Pages/Feed/ClientInfos/GridList";
+import FeedScreen from "../Pages/Feed/Index";
 
 const Stack = createStackNavigator();
 // function to navigate the screens
@@ -54,6 +55,11 @@ const AppRoutes = () => {
         name="GridList"
         component={GridList}
         options={{ headerShown: false }}
+      />
+      <Stack.Screen
+        name="Feed_Screen"
+        options={{ headerShown: false }}
+        component={FeedScreen}
       />
     </Stack.Navigator>
   );

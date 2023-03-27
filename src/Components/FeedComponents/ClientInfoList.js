@@ -11,9 +11,9 @@ const ClientInfoList = ({ date }) => {
       </View>
       <View style={styles.content}>
         <Text style={styles.label}>Nome</Text>
-        <Text style={styles.value}>{date.nome}</Text>
+        <Text style={styles.value}>{date.name}</Text>
         <Text style={styles.label}>Email</Text>
-        <Text style={styles.value}>{date.descrição}</Text>
+        <Text style={styles.value}>{date.email}</Text>
         <Text style={styles.label}>Endereço</Text>
         <Text style={styles.value}>{date.endereço}</Text>
         <Text style={styles.label}>Data de inicio</Text>

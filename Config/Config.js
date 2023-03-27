@@ -3,14 +3,7 @@ import "firebase/compat/firestore";
 import { getAuth } from "firebase/auth";
 
 const firebaseConfig = {
-  // here is your fiebase autenticatios infos
-  // apiKey: ,
-  // authDomain:
-  // projectId:
-  // storageBucket:
-  // messagingSenderId:
-  // appId:
-  // measurementId:
+  //paste here your firebase aplication credencials
 };
 
 const app = firebase.initializeApp(firebaseConfig);

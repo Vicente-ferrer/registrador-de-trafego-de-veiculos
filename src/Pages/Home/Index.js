@@ -24,13 +24,17 @@ const HomeScreen = () => {
           style={styles.btnAction}
           onPress={() => navigation.navigate("Feed_Screen")}
         >
-          <Text>Ver seus Clientes</Text>
+          <Text style={{ color: "white", fontWeight: "bold" }}>
+            Ver seus Clientes
+          </Text>
         </TouchableOpacity>
         <TouchableOpacity
           style={styles.btnAction}
           onPress={() => navigation.navigate("CreateClient")}
         >
-          <Text>Adicionar Cliente</Text>
+          <Text style={{ color: "white", fontWeight: "bold" }}>
+            Adicionar Cliente
+          </Text>
         </TouchableOpacity>
       </View>
     </SafeAreaView>

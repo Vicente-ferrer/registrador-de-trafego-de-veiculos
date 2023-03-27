@@ -6,15 +6,15 @@ import { db } from "../../../Config/Config";
 
 export default function CreateClientScreen() {
   const [name, setName] = useState("");
-  const [description, setDescription] = useState("");
+  const [email, setEmail] = useState("");
   const [address, setAddress] = useState("");
   const [startTime, setStartTime] = useState("");
   const [endTime, setEndTime] = useState("");
   const navigation = useNavigation();
   const [user, setUser] = useState(null);
   const dados = {
-    nome: name,
-    descrição: description,
+    name: name,
+    email: email,
     endereço: address,
     dataInicio: startTime,
     dataFinalização: endTime,
@@ -30,7 +30,7 @@ export default function CreateClientScreen() {
       .collection("ClientListbyUser")
       .add(dados)
       .then((docRef) => {
-        navigation.navigate("ContVeicles", { clienteId: docRef.id });
+        navigation.navigate("Feed_Screen");
       })
       .catch((error) => {
         console.error("Erro ao criar cliente: ", error);
@@ -39,7 +39,7 @@ export default function CreateClientScreen() {
 
   const cleanForm = () => {
     setName("");
-    setDescription("");
+    setEmail("");
     setAddress("");
     setStartTime("");
     setEndTime("");
@@ -47,27 +47,23 @@ export default function CreateClientScreen() {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.label}>Cliente:</Text>
+      <Text style={styles.label}>Nome:</Text>
       <TextInput style={styles.input} value={name} onChangeText={setName} />
-      <Text style={styles.label}>Descrição do Serviço:</Text>
-      <TextInput
-        style={styles.input}
-        value={description}
-        onChangeText={setDescription}
-      />
+      <Text style={styles.label}>Email:</Text>
+      <TextInput style={styles.input} value={email} onChangeText={setEmail} />
       <Text style={styles.label}>Local da contagem:</Text>
       <TextInput
         style={styles.input}
         value={address}
         onChangeText={setAddress}
       />
-      <Text style={styles.label}>Horário de Início:</Text>
+      <Text style={styles.label}>Data de Início:</Text>
       <TextInput
         style={styles.input}
         value={startTime}
         onChangeText={setStartTime}
       />
-      <Text style={styles.label}>Horário de Término:</Text>
+      <Text style={styles.label}>Data de Término:</Text>
       <TextInput
         style={styles.input}
         value={endTime}
@@ -78,7 +74,7 @@ export default function CreateClientScreen() {
         onPress={() => {
           if (
             (name !== "") &
-            (description !== "") &
+            (email !== "") &
             (address !== "") &
             (startTime !== "") &
             (endTime !== "")
