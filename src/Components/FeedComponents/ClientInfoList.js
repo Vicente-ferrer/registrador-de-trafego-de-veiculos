@@ -1,6 +1,8 @@
 import React from "react";
 import { View, SafeAreaView, Text, StyleSheet } from "react-native";
 
+//reusable component to render flatlist data
+
 const ClientInfoList = ({ date }) => {
   return (
     <SafeAreaView style={styles.container}>

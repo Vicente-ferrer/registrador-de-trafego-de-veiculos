@@ -6,10 +6,12 @@ import {
   View,
   StyleSheet,
   SafeAreaView,
+  TextInput,
+  Button,
 } from "react-native";
 
 import { db } from "../../../Config/Config";
-// Componente reutilizável para os botões
+// reusable button component with the label "AUTO"
 const Button = ({ position, onPress }) => {
   return (
     <TouchableOpacity style={styles.button} onPress={onPress}>
@@ -18,7 +20,9 @@ const Button = ({ position, onPress }) => {
   );
 };
 
-// Componente reutilizável para as linhas de botões
+//  reusable component that creates a row of buttons using an array of button positions
+// and an 'onPress' function
+
 const Row = ({ buttons, onPress }) => {
   return (
     <View style={styles.row}>
@@ -29,50 +33,49 @@ const Row = ({ buttons, onPress }) => {
   );
 };
 
-// Componente da tela de contagem
+// component for counting traffic that includes input fields for time,
+// a text input for adding a title, buttons for counting traffic,
+// and buttons to start and stop counting
+
 const CountScreen = ({ startCount, stopCount, CliendId }) => {
   const [count1, setCount1] = useState({});
-  const [count2, setCount2] = useState({});
-  const [count3, setCount3] = useState({});
-  const [count4, setCount4] = useState({});
+  const [timeStart, setTimeStart] = useState("");
+  const [timeEnd, setTimeEnd] = useState("");
+  const [movTitle, setMovTitle] = useState();
 
-  const data = {
-    MOV1: {
-      AUTO1: count1[1] || 0,
-      AUTO2: count1[2] || 0,
-      AUTO3: count1[3] || 0,
-      AUTO4: count1[4] || 0,
-    },
-    MOV2: {
-      AUTO5: count2[5] || 0,
-      AUTO6: count2[6] || 0,
-      AUTO7: count2[7] || 0,
-      AUTO8: count2[8] || 0,
-    },
-    MOV3: {
-      AUTO9: count3[9] || 0,
-      AUTO10: count3[10] || 0,
-      AUTO11: count3[11] || 0,
-      AUTO12: count3[12] || 0,
-    },
-    MOV4: {
-      AUTO13: count4[13] || 0,
-      AUTO14: count4[14] || 0,
-      AUTO15: count4[15] || 0,
-      AUTO16: count4[16] || 0,
-    },
-  };
+  const date = new Date();
 
+  let day = date.getDate();
+  let month = date.getMonth() + 1;
+  let year = date.getFullYear();
+
+  if (month < 10) {
+    month = `0${month}`;
+  }
+  // const for format date to dd-mm-yy
+  let currentDate = `${day}-${month}-${year}`;
+  //function is called when the user stops counting and saves the count data to the Firebase database
   const saveAction = async () => {
     const userId = await SecureStore.getItemAsync("user");
     db.collection(`user/${userId}/ClientListbyUser/`)
       .doc(CliendId)
       .collection("countData")
       .add({
-        data: { data },
+        MOV: movTitle,
+        Data_contagem: currentDate,
+        Inicio: timeStart,
+        Fim: timeEnd,
+        AUTO: count1[1] || 0,
+        MOTO: count1[2] || 0,
+        ÔNIBUS: count1[3] || 0,
+        CAMINHÃO: count1[4] || 0,
+        ADICIONAL: count1[5] || 0,
       })
       .then(() => {
         alert("Dados de contagem salvos com sucesso!");
+        setMovTitle("");
+        setTimeStart("");
+        setTimeEnd("");
       })
       .catch((error) => {
         console.error("Erro ao salvar dados de contagem: ", error);
@@ -85,46 +88,49 @@ const CountScreen = ({ startCount, stopCount, CliendId }) => {
         ...prevState,
         [button]: (prevState[button] || 0) + 1,
       }));
-    } else if (row === 2) {
-      setCount2((prevState) => ({
-        ...prevState,
-        [button]: (prevState[button] || 0) + 1,
-      }));
-    } else if (row === 3) {
-      setCount3((prevState) => ({
-        ...prevState,
-        [button]: (prevState[button] || 0) + 1,
-      }));
-    } else if (row === 4) {
-      setCount4((prevState) => ({
-        ...prevState,
-        [button]: (prevState[button] || 0) + 1,
-      }));
     }
   };
 
   return (
     <SafeAreaView style={{ flex: 1 }}>
+      <View style={styles.inputContainer}>
+        <TextInput
+          style={styles.input}
+          value={timeStart}
+          onChangeText={(text) => setTimeStart(text)}
+          placeholder="Ex: 7:00"
+          placeholderTextColor="black"
+          keyboardType="default"
+          autoCapitalize="none"
+          autoCorrect={false}
+        />
+        <TextInput
+          style={styles.input}
+          value={timeEnd}
+          onChangeText={(text) => setTimeEnd(text)}
+          placeholder="Ex: 7:15"
+          placeholderTextColor="black"
+          keyboardType="default"
+          autoCapitalize="none"
+          autoCorrect={false}
+        />
+        <TextInput
+          style={styles.input}
+          value={movTitle}
+          onChangeText={(text) => setMovTitle(text)}
+          placeholder="Movimento"
+          placeholderTextColor="black"
+          keyboardType="defaultl"
+          autoCapitalize="none"
+          autoCorrect={false}
+        />
+      </View>
+
       <View style={styles.container}>
         <Row
-          buttons={[1, 2, 3, 4]}
+          buttons={[1, 2, 3, 4, 5]}
           onPress={(button) => handlePress(button, 1)}
           count={count1}
-        />
-        <Row
-          buttons={[5, 6, 7, 8]}
-          onPress={(button) => handlePress(button, 2)}
-          count={count2}
-        />
-        <Row
-          buttons={[9, 10, 11, 12]}
-          onPress={(button) => handlePress(button, 3)}
-          count={count3}
-        />
-        <Row
-          buttons={[13, 14, 15, 16]}
-          onPress={(button) => handlePress(button, 4)}
-          count={count4}
         />
       </View>
       <View
@@ -163,7 +169,7 @@ const styles = StyleSheet.create({
     marginBottom: 10,
   },
   button: {
-    width: "20%",
+    width: "15%",
     height: 60,
     backgroundColor: "#1E90FF",
     justifyContent: "center",
@@ -200,6 +206,26 @@ const styles = StyleSheet.create({
   countItem: {
     fontSize: 16,
     marginVertical: 5,
+  },
+  inputContainer: {
+    width: "100%",
+    height: "10%",
+    flexDirection: "row",
+    justifyContent: "center",
+    alignItems: "center",
+    marginTop: "5%",
+    marginRight: "-10%",
+  },
+  input: {
+    width: "30%",
+    height: "70%",
+    backgroundColor: "#F2F2F2",
+    padding: 10,
+    borderRadius: 5,
+    borderWidth: 3,
+    borderColor: "#2980b9",
+    marginRight: 10,
+    fontSize: 16,
   },
 });
 

@@ -7,7 +7,7 @@ import {
   StyleSheet,
 } from "react-native";
 import { useNavigation } from "@react-navigation/native";
-
+//reusable component to render flatlist data
 const ClientList = ({ data }) => {
   const navigation = useNavigation();
 

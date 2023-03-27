@@ -11,12 +11,16 @@ import {
 import List from "../../../Components/FeedComponents/ClientInfoList";
 
 const ClientInfo = () => {
+  // Get the current route and extract the data passed in as a parameter
   const route = useRoute();
   const data = route.params.data;
   const navigation = useNavigation();
 
+  // Define the renderItem function, which renders a List component with the given item as a prop
   const renderItem = ({ item }) => <List date={item} />;
   return (
+    // Render a SafeAreaView with the specified styles as the container for the screen
+
     <SafeAreaView style={styles.container}>
       <FlatList
         data={[data]}
@@ -35,7 +39,7 @@ const ClientInfo = () => {
         <TouchableOpacity
           style={styles.addButton}
           onPress={() => {
-            navigation.navigate("GridList", { CliendId: data.id });
+            navigation.navigate("GridList", { data: data.id });
           }}
         >
           <Text style={styles.addButtonText}>Ver dados de contagem</Text>

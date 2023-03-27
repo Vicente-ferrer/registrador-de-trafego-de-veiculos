@@ -4,21 +4,23 @@ import { View, Text, Button, StyleSheet, SafeAreaView } from "react-native";
 import ButtonCount from "./../../Components/ButtonComponent/ButtonCount";
 
 const Timer = () => {
-  const [time, setTime] = useState(900); // 15 minutos em segundos
-  const [countdownSpeed, setCountdownSpeed] = useState(1); // velocidade inicial
-  const [isCounting, setIsCounting] = useState(false);
-  const [initialTime, setInitialTime] = useState(900);
+  const [time, setTime] = useState(900); //  inicial time equals 15 min
+  const [countdownSpeed, setCountdownSpeed] = useState(1); // initial speed
+  const [isCounting, setIsCounting] = useState(false); // determines whether the counter is running or not
+  const [initialTime, setInitialTime] = useState(900); // initial time
 
   const route = useRoute();
-  const CliendId = route.params.CliendId;
+  const CliendId = route.params.CliendId; // Customer ID being served
 
+  // Atualiza o tempo a cada segundo
   useEffect(() => {
     const interval = setInterval(() => {
       if (isCounting) {
-        setTime((prevTime) => prevTime - 1);
+        setTime((prevTime) => prevTime - 1); // subtracts a second from the current time
       }
     }, 1000 / countdownSpeed);
 
+    // Clears range when component is unmounted
     return () => clearInterval(interval);
   }, [countdownSpeed, isCounting]);
 
@@ -34,11 +36,13 @@ const Timer = () => {
     setInitialTime(time);
   };
 
+  // Stop countdown and back to start time
   const stopCountdown = () => {
     setIsCounting(false);
     setTime(initialTime);
   };
 
+  // Formats time in minutes and seconds
   const formatTime = (time) => {
     const minutes = Math.floor(time / 60)
       .toString()
@@ -50,6 +54,7 @@ const Timer = () => {
   return (
     <SafeAreaView style={styles.container}>
       <Text style={styles.time}>{formatTime(time)}</Text>
+
       <View style={styles.speedButtons}>
         <View style={styles.speedButton}>
           <Button title="Normal" onPress={() => setCountdownSpeed(1)} />
@@ -64,6 +69,7 @@ const Timer = () => {
           <Button title="3x" onPress={() => setCountdownSpeed(3)} />
         </View>
       </View>
+      {/* Botão de contagem */}
       <View style={styles.counterContainer}>
         <ButtonCount
           startCount={startCountdown}
