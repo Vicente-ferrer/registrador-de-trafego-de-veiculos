@@ -7,7 +7,6 @@ import {
   StyleSheet,
   SafeAreaView,
   TextInput,
-  Button,
 } from "react-native";
 
 import { db } from "../../../Config/Config";

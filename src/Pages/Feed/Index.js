@@ -55,15 +55,11 @@ const FeedScreen = () => {
 
   return (
     <SafeAreaView style={styles.container}>
-      {" "}
-      // Render a SafeAreaView component with a style defined by the styles
-      object
       <FlatList
         data={clients} // Pass the array of clients to the FlatList component
         renderItem={renderClientItem} // Pass the renderClientItem function to the FlatList component to render each client item
         keyExtractor={(item) => item.id} // Provide a unique key for each item in the list
         refreshControl={
-          // Add the RefreshControl component to the FlatList component to enable pull-to-refresh functionality
           <RefreshControl refreshing={refreshing} onRefresh={handleRefresh} />
         }
       />
