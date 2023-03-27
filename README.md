@@ -30,7 +30,7 @@ Here are the technologies and Libs used in this project.
 
 
 
-## Devices
+## Make for
 
 <P>Initially, the app was not created to run on a smartphone, but rather on a tablet. Therefore, it may have some screen bugs when running on mobile phones.<P>
 
