@@ -1,5 +1,3 @@
-# Vehicle Counter
-
 ## Descrição do Projeto
 
 O projeto é um registrador de veículos, onde você pode registrar o horário de início, horário de término e direção do movimento dos veículos, possibilitando fazer uma contagem de veiculos em um dado tempo.
