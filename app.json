@@ -4,7 +4,7 @@
     "slug": "Virtu",
     "version": "1.0.0",
     "orientation": "default",
-    "inicialOrientation":"portrait",
+    "inicialOrientation": "portrait",
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "light",
     "splash": {
@@ -12,12 +12,11 @@
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
+    "entryPoint": "./App.js",
     "updates": {
       "fallbackToCacheTimeout": 0
     },
-    "assetBundlePatterns": [
-      "**/*"
-    ],
+    "assetBundlePatterns": ["**/*"],
     "ios": {
       "supportsTablet": true
     },

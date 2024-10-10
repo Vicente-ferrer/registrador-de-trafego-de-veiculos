@@ -14,7 +14,7 @@ const Stack = createStackNavigator();
 // function to navigate the screens
 const AppRoutes = () => {
   return (
-    <Stack.Navigator initialRouteName="Preload">
+    <Stack.Navigator initialRouteName="Home_Screen">
       <Stack.Screen
         name="Preload"
         options={{ headerShown: false }}
